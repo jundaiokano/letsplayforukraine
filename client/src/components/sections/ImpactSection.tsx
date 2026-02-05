@@ -18,10 +18,6 @@ export default function ImpactSection() {
 
   const stats = [
     {
-      value: '20+',
-      label: t('impact.concerts'),
-    },
-    {
       value: '1,000+',
       label: t('impact.attendees'),
     },
@@ -65,7 +61,7 @@ export default function ImpactSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-3 gap-6 md:gap-12 mb-16 md:mb-24"
+          className="grid grid-cols-2 gap-6 md:gap-12 mb-16 md:mb-24 max-w-2xl mx-auto"
         >
           {stats.map((stat, index) => (
             <div key={index} className="text-center bg-white/50 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-sm">

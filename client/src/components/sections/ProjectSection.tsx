@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Calendar, MapPin, Music, Heart } from 'lucide-react';
+import { Calendar, MapPin, Heart } from 'lucide-react';
 
 /*
  * DESIGN: Hiroshima Dawn - Project 2026 Section
@@ -24,13 +24,8 @@ export default function ProjectSection() {
     },
     {
       icon: MapPin,
-      title: t('project.locations'),
-      description: 'Japan',
-    },
-    {
-      icon: Music,
-      title: language === 'ja' ? 'コンサート回数' : 'Concerts',
-      description: 'TBD',
+      title: language === 'ja' ? '開催場所' : 'Location',
+      description: language === 'ja' ? '東京・広島（日本）' : 'Tokyo & Hiroshima, Japan',
     },
     {
       icon: Heart,
@@ -89,7 +84,7 @@ export default function ProjectSection() {
             </p>
 
             {/* Feature Grid */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-3 gap-6">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
