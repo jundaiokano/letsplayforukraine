@@ -1,25 +1,42 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import HeroSection from '@/components/sections/HeroSection';
+import StorySection from '@/components/sections/StorySection';
+import ProjectSection from '@/components/sections/ProjectSection';
+import ImpactSection from '@/components/sections/ImpactSection';
+import GallerySection from '@/components/sections/GallerySection';
+import ContactSection from '@/components/sections/ContactSection';
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
+/*
+ * DESIGN SYSTEM: "Hiroshima Dawn" - Poetic Naturalism
+ * 
+ * This website tells the story of Let's Pray / Play for Peace,
+ * a charity concert series founded by young musicians from Hiroshima.
+ * 
+ * Visual Theme:
+ * - Dawn gradient (pale pink to soft blue) symbolizing hope
+ * - Warm stone and forest tones for grounding
+ * - Soft gold accents representing the eternal flame
+ * - Generous whitespace and elegant typography
+ * 
+ * Typography:
+ * - Headlines: Shippori Mincho (JP) / Libre Baskerville (EN)
+ * - Body: Noto Sans JP
  */
-export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
 
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen">
+      <Navigation />
       <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+        <HeroSection />
+        <StorySection />
+        <ProjectSection />
+        <ImpactSection />
+        <GallerySection />
+        <ContactSection />
       </main>
+      <Footer />
     </div>
   );
 }
