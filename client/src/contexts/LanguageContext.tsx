@@ -96,7 +96,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.subtitle': '音楽で希望を、ハーモニーで明日を',
     'hero.description': '広島出身の若き音楽家たちによるチャリティーコンサートシリーズ。音楽という普遍的な言語を通じて平和を訴え、国境を越えた人道支援を届けています。',
     'hero.cta': '詳しく見る',
-    'hero.donate': 'ご支援ください',
+    'hero.donate': 'ご支援はこちら',
     
     // Story Section
     'story.title': '私たちの物語',
