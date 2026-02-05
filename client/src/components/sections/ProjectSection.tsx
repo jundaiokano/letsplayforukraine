@@ -30,7 +30,7 @@ export default function ProjectSection() {
     {
       icon: Heart,
       title: language === 'ja' ? '支援先' : 'Beneficiaries',
-      description: 'TBD',
+      description: language === 'ja' ? 'ウクライナロータリークラブ' : 'Ukraine Rotary Club',
     },
   ];
 
