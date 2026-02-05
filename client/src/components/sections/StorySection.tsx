@@ -6,14 +6,13 @@ import { useRef } from 'react';
 /*
  * DESIGN: Hiroshima Dawn - Story Section
  * Narrative-driven layout with founder portraits
- * Asymmetric composition with generous whitespace
+ * Peace-themed warm gradient background
  */
 
 const IMAGES = {
-  sunflower: 'https://files.manuscdn.com/user_upload_by_module/session_file/310419663030064758/BHZePScYFnHmsWcV.jpg',
   abombDome: 'https://files.manuscdn.com/user_upload_by_module/session_file/310419663030064758/iCncTRnDIFzrZCOF.jpg',
   eishin: 'https://files.manuscdn.com/user_upload_by_module/session_file/310419663030064758/YviLDLNcECnUVQPF.jpg',
-  jundai: 'https://files.manuscdn.com/user_upload_by_module/session_file/310419663030064758/qajmxpsFsUpckdVz.jpg',
+  jundai: '/images/jundai-profile.png',
 };
 
 export default function StorySection() {
@@ -22,8 +21,12 @@ export default function StorySection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="story" className="py-24 md:py-32 bg-background grain-overlay">
-      <div className="container mx-auto px-4">
+    <section id="story" className="py-24 md:py-32 bg-hope-gradient grain-overlay relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-sky-100/40 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           ref={ref}
@@ -50,15 +53,15 @@ export default function StorySection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="aspect-[4/3] overflow-hidden rounded-sm shadow-xl">
+            <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-xl bg-white/50 p-2">
               <img
                 src={IMAGES.abombDome}
                 alt="Founders at Hiroshima A-Bomb Dome"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-md"
               />
             </div>
             {/* Decorative frame */}
-            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary/30 rounded-sm -z-10" />
+            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary/20 rounded-lg -z-10" />
           </motion.div>
 
           {/* Text Content */}
@@ -80,32 +83,16 @@ export default function StorySection() {
           </motion.div>
         </div>
 
-        {/* Sunflower Image - Full Width */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mb-20"
-        >
-          <div className="aspect-[21/9] overflow-hidden rounded-sm shadow-xl">
-            <img
-              src={IMAGES.sunflower}
-              alt="Founders in sunflower field"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </motion.div>
-
         {/* Founders Profiles */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
           {/* Eishin */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col md:flex-row gap-6 items-start"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col md:flex-row gap-6 items-start bg-white/40 backdrop-blur-sm rounded-xl p-6 shadow-sm"
           >
-            <div className="w-32 h-40 md:w-40 md:h-52 flex-shrink-0 overflow-hidden rounded-sm shadow-lg">
+            <div className="w-32 h-40 md:w-40 md:h-52 flex-shrink-0 overflow-hidden rounded-lg shadow-lg">
               <img
                 src={IMAGES.eishin}
                 alt="Eishin Richard Hiraishi"
@@ -127,14 +114,14 @@ export default function StorySection() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col md:flex-row gap-6 items-start"
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-col md:flex-row gap-6 items-start bg-white/40 backdrop-blur-sm rounded-xl p-6 shadow-sm"
           >
-            <div className="w-32 h-40 md:w-40 md:h-52 flex-shrink-0 overflow-hidden rounded-sm shadow-lg">
+            <div className="w-32 h-40 md:w-40 md:h-52 flex-shrink-0 overflow-hidden rounded-lg shadow-lg bg-black">
               <img
                 src={IMAGES.jundai}
                 alt="Jundai Okano"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div className="flex-1">

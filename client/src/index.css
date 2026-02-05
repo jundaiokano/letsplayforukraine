@@ -242,6 +242,45 @@
     background: oklch(0.75 0.12 85);
     margin: 0 auto;
   }
+  
+  /* Peace-themed backgrounds */
+  .bg-peace-gradient {
+    background: linear-gradient(
+      180deg,
+      oklch(0.98 0.01 90) 0%,
+      oklch(0.96 0.02 85) 30%,
+      oklch(0.95 0.015 200) 70%,
+      oklch(0.97 0.01 90) 100%
+    );
+  }
+  
+  .bg-hope-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.97 0.015 50) 0%,
+      oklch(0.98 0.01 90) 50%,
+      oklch(0.96 0.02 200) 100%
+    );
+  }
+  
+  .bg-harmony-gradient {
+    background: linear-gradient(
+      180deg,
+      oklch(0.99 0.005 90) 0%,
+      oklch(0.97 0.02 50) 25%,
+      oklch(0.96 0.015 200) 75%,
+      oklch(0.98 0.01 90) 100%
+    );
+  }
+  
+  /* Warm background for sections */
+  .bg-warm-section {
+    background: linear-gradient(
+      180deg,
+      oklch(0.98 0.015 60) 0%,
+      oklch(0.97 0.02 70) 100%
+    );
+  }
 }
 
 /* Custom animations */

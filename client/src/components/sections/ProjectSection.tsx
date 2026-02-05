@@ -12,15 +12,15 @@ import { Calendar, MapPin, Music, Heart } from 'lucide-react';
 const NHK_PERFORMANCE = 'https://files.manuscdn.com/user_upload_by_module/session_file/310419663030064758/bYMTmIIkpDHPldBl.png';
 
 export default function ProjectSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const features = [
     {
       icon: Calendar,
-      title: t('project.period'),
-      description: '2026',
+      title: language === 'ja' ? '開催時期' : 'Period',
+      description: 'TBD',
     },
     {
       icon: MapPin,
@@ -29,13 +29,13 @@ export default function ProjectSection() {
     },
     {
       icon: Music,
-      title: t('project.concerts'),
-      description: 'Live',
+      title: language === 'ja' ? 'コンサート回数' : 'Concerts',
+      description: 'TBD',
     },
     {
       icon: Heart,
-      title: t('project.beneficiaries'),
-      description: 'Aid',
+      title: language === 'ja' ? '支援先' : 'Beneficiaries',
+      description: 'TBD',
     },
   ];
 
@@ -102,6 +102,9 @@ export default function ProjectSection() {
                   <h3 className="font-medium text-foreground text-sm mb-1">
                     {feature.title}
                   </h3>
+                  <p className="text-muted-foreground text-xs">
+                    {feature.description}
+                  </p>
                 </motion.div>
               ))}
             </div>

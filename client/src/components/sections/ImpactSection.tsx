@@ -1,12 +1,12 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Award } from 'lucide-react';
+import { Award, Heart } from 'lucide-react';
 
 /*
  * DESIGN: Hiroshima Dawn - Impact Section
  * Statistics display with humanitarian aid imagery
- * Clean, impactful presentation of achievements
+ * Peace-themed warm gradient background
  */
 
 const HUMANITARIAN_AID = 'https://files.manuscdn.com/user_upload_by_module/session_file/310419663030064758/TtvDDCeigopOxHAW.png';
@@ -18,22 +18,31 @@ export default function ImpactSection() {
 
   const stats = [
     {
-      value: '25+',
+      value: '20+',
       label: t('impact.concerts'),
     },
     {
-      value: '1,200+',
+      value: '1,000+',
       label: t('impact.attendees'),
     },
     {
-      value: language === 'ja' ? '600万円+' : '¥6M+',
+      value: language === 'ja' ? '500万円+' : '¥5M+',
       label: t('impact.donations'),
     },
   ];
 
   return (
-    <section id="impact" className="py-24 md:py-32 bg-background grain-overlay">
-      <div className="container mx-auto px-4">
+    <section id="impact" className="py-24 md:py-32 bg-peace-gradient grain-overlay relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-1/4 left-0 w-72 h-72 bg-rose-100/30 rounded-full blur-3xl -translate-x-1/2" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl translate-x-1/2" />
+      
+      {/* Decorative peace symbols */}
+      <div className="absolute top-20 right-20 opacity-5">
+        <Heart className="w-40 h-40 text-primary" />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           ref={ref}
@@ -59,7 +68,7 @@ export default function ImpactSection() {
           className="grid grid-cols-3 gap-6 md:gap-12 mb-16 md:mb-24"
         >
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
+            <div key={index} className="text-center bg-white/50 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-sm">
               <div className="font-serif text-3xl md:text-5xl lg:text-6xl text-primary font-medium mb-2">
                 {stat.value}
               </div>
@@ -77,9 +86,9 @@ export default function ImpactSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center mb-16 md:mb-24"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 rounded-full">
-            <Award className="w-5 h-5 text-primary" />
-            <span className="text-sm md:text-base font-medium text-foreground">
+          <div className="inline-flex items-center gap-3 px-8 py-4 bg-white/60 backdrop-blur-sm rounded-full shadow-sm">
+            <Award className="w-6 h-6 text-primary" />
+            <span className="text-base md:text-lg font-medium text-foreground">
               {t('impact.recognition')}
             </span>
           </div>
@@ -92,6 +101,7 @@ export default function ImpactSection() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
+            className="bg-white/40 backdrop-blur-sm rounded-xl p-8 shadow-sm"
           >
             <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-6">
               {t('impact.humanitarian')}
@@ -107,11 +117,11 @@ export default function ImpactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="aspect-[4/3] overflow-hidden rounded-sm shadow-xl">
+            <div className="aspect-[4/3] overflow-hidden rounded-xl shadow-xl bg-white/50 p-2">
               <img
                 src={HUMANITARIAN_AID}
                 alt="Humanitarian aid activities in Ukraine"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover object-top rounded-lg"
               />
             </div>
           </motion.div>
