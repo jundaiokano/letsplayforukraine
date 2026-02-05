@@ -153,7 +153,7 @@ function vitePluginManusDebugCollector(): Plugin {
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? '/lets-pray-for-peace-web/' : '/',
+  base: process.env.GITHUB_ACTIONS ? '/letsplayforukraine/' : '/',
   plugins,
   resolve: {
     alias: {
