@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>購入完了 | Let's Pray/Play for Peace 2026</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:         oklch(0.995 0.005 90);
+      --fg:         oklch(0.25  0.02  60);
+      --muted:      oklch(0.50  0.02  60);
+      --border:     oklch(0.90  0.01  90);
+      --gold:       oklch(0.75  0.12  85);
+      --gold-light: oklch(0.97  0.02  85);
+      --card:       #ffffff;
+      --dawn-pink:  oklch(0.95  0.02  10);
+      --dawn-blue:  oklch(0.94  0.02  250);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.8;
+      font-size: 15px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--fg);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-logo:hover { color: var(--gold); }
+
+    /* ── Hero ── */
+    .hero {
+      margin-top: 64px;
+      padding: 4.5rem 1.5rem 3.5rem;
+      background: linear-gradient(
+        180deg,
+        var(--dawn-blue) 0%,
+        oklch(0.96 0.015 30) 50%,
+        var(--dawn-pink) 100%
+      );
+      text-align: center;
+    }
+
+    .check-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--gold-light);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .check-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 500;
+      color: var(--fg);
+      line-height: 1.4;
+      margin-bottom: .8rem;
+    }
+
+    .gold-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.2rem auto 1.4rem;
+    }
+
+    .hero-sub {
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      width: 100%;
+    }
+
+    /* ── Info cards ── */
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      margin-bottom: 1.5rem;
+    }
+
+    .info-card-header {
+      font-family: 'Shippori Mincho', serif;
+      font-size: .95rem;
+      font-weight: 500;
+      padding: .8rem 1.3rem;
+      background: var(--gold-light);
+      color: var(--fg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .info-card-header::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--gold);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .info-card-body {
+      padding: 1.2rem 1.3rem;
+    }
+
+    .concert-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .concert-item {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .concert-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .concert-city {
+      font-family: 'Shippori Mincho', serif;
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: .25rem;
+    }
+
+    .concert-detail {
+      font-size: .84rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Notice box ── */
+    .notice-box {
+      padding: 1.1rem 1.3rem;
+      background: var(--dawn-pink);
+      border: 1px solid oklch(0.88 0.03 10);
+      border-radius: .6rem;
+      font-size: .82rem;
+      color: var(--fg);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Back button ── */
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      background: var(--fg);
+      color: oklch(0.97 0.01 90);
+      border-radius: .6rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: .9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .btn-home:hover {
+      background: oklch(0.35 0.02 60);
+    }
+
+    .btn-home svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--fg);
+      color: oklch(0.92 0.01 90);
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+      margin-bottom: .8rem;
+    }
+
+    .footer-sub {
+      font-size: .8rem;
+      color: oklch(0.65 0.01 90);
+      margin-bottom: 1rem;
+    }
+
+    .footer-gold {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto .9rem;
+      opacity: .5;
+    }
+
+    .footer-copy {
+      font-size: .75rem;
+      color: oklch(0.55 0.01 90);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Let's Pray / Play for Peace</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="check-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <h1>ご購入ありがとうございます</h1>
+    <div class="gold-divider"></div>
+    <p class="hero-sub">確認メールをお送りしました。当日会場でお待ちしております。</p>
+  </section>
+
+  <!-- Main -->
+  <main>
+
+    <!-- Concert info -->
+    <div class="info-card">
+      <div class="info-card-header">公演日時・会場</div>
+      <div class="info-card-body">
+        <div class="concert-row">
+          <div class="concert-item">
+            <div class="concert-city">東京公演</div>
+            <div class="concert-detail">
+              2026年4月25日（土）19:30 開演（19:00 開場）<br>
+              めぐろパーシモンホール 小ホール<br>
+              東京都目黒区八雲1丁目1-1
+            </div>
+          </div>
+          <div class="concert-item">
+            <div class="concert-city">広島公演</div>
+            <div class="concert-detail">
+              2026年5月3日（日）18:30 開演（18:00 開場）<br>
+              広島市東区民文化センター スタジオ１<br>
+              広島県広島市東区東蟹屋町10-31
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notice -->
+    <div class="notice-box">
+      チケット引換券は2026年4月中旬にメールにてお送りします。当日は引換券と学生席ご購入の方は学生証をお持ちください。ご不明な点は <a href="mailto:jundaiokano@keio.jp" style="color: oklch(0.55 0.10 85);">jundaiokano@keio.jp</a> までお問い合わせください。
+    </div>
+
+    <!-- Back to home -->
+    <a href="/" class="btn-home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      トップページへ
+    </a>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">Let's Pray / Play for Peace</div>
+    <p class="footer-sub">平和のために、音楽と祈りを。</p>
+    <div class="footer-gold"></div>
+    <p class="footer-copy">&copy; 2026 Let's Pray/Play for Peace 実行委員会. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

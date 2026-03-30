@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>チケット購入 | Let's Pray/Play for Peace 2026</title>
+  <meta name="description" content="Let's Pray/Play for Peace 2026 チケット購入ページ。東京・広島公演のチケットをオンラインでご購入いただけます。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:         oklch(0.995 0.005 90);
+      --fg:         oklch(0.25  0.02  60);
+      --muted:      oklch(0.50  0.02  60);
+      --border:     oklch(0.90  0.01  90);
+      --gold:       oklch(0.75  0.12  85);
+      --gold-light: oklch(0.97  0.02  85);
+      --card:       #ffffff;
+      --dawn-pink:  oklch(0.95  0.02  10);
+      --dawn-blue:  oklch(0.94  0.02  250);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--fg);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-logo:hover { color: var(--gold); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    /* ── Hero ── */
+    .hero {
+      margin-top: 64px;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(
+        180deg,
+        var(--dawn-blue) 0%,
+        oklch(0.96 0.015 30) 50%,
+        var(--dawn-pink) 100%
+      );
+      text-align: center;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 500;
+      color: var(--fg);
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+    }
+
+    .gold-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero-note {
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    /* ── Main layout ── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Section heading ── */
+    .section-heading {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .section-heading::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--gold);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Concert section ── */
+    .concert-section {
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Ticket cards grid ── */
+    .ticket-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ── Ticket card ── */
+    .ticket-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: box-shadow .2s, border-color .2s;
+    }
+
+    .ticket-card.has-quantity {
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+
+    .ticket-card img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: var(--border);
+    }
+
+    .ticket-card-body {
+      padding: 1rem 1.1rem 1.1rem;
+    }
+
+    .ticket-name {
+      font-family: 'Shippori Mincho', serif;
+      font-size: .98rem;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: .15rem;
+    }
+
+    .ticket-price {
+      font-size: .88rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: .4rem;
+    }
+
+    .ticket-note {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-bottom: .8rem;
+      line-height: 1.5;
+    }
+
+    /* ── Quantity control ── */
+    .qty-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: .5rem;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .15s, background .15s;
+      flex-shrink: 0;
+    }
+
+    .qty-btn:hover {
+      border-color: var(--gold);
+      background: var(--gold-light);
+    }
+
+    .qty-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .qty-num {
+      min-width: 24px;
+      text-align: center;
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
+    /* ── Sidebar (summary) ── */
+    .sidebar {
+      position: sticky;
+      top: 80px;
+    }
+
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+
+    .summary-header {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: .9rem 1.3rem;
+      background: var(--gold-light);
+      color: var(--fg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .summary-header::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--gold);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .summary-body {
+      padding: 1.2rem 1.3rem;
+    }
+
+    .summary-empty {
+      font-size: .85rem;
+      color: var(--muted);
+      text-align: center;
+      padding: .5rem 0 .8rem;
+    }
+
+    .summary-items {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: .85rem;
+      padding: .35rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: .5rem;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-item-name {
+      color: var(--fg);
+      flex: 1;
+    }
+
+    .summary-item-qty {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .summary-item-price {
+      font-weight: 500;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    .summary-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: .8rem;
+      border-top: 2px solid var(--border);
+      margin-top: .3rem;
+    }
+
+    .summary-total-label {
+      font-family: 'Shippori Mincho', serif;
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .summary-total-amount {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--fg);
+    }
+
+    /* ── Notes textarea ── */
+    .notes-label {
+      display: block;
+      font-size: .8rem;
+      color: var(--muted);
+      margin: 1.2rem 0 .4rem;
+    }
+
+    .notes-textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: .5rem;
+      padding: .65rem .8rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .82rem;
+      color: var(--fg);
+      background: var(--bg);
+      resize: vertical;
+      min-height: 72px;
+      transition: border-color .15s;
+    }
+
+    .notes-textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    /* ── Checkout button ── */
+    .btn-checkout {
+      display: block;
+      width: 100%;
+      margin-top: 1.1rem;
+      padding: .85rem 1rem;
+      background: var(--fg);
+      color: oklch(0.97 0.01 90);
+      border: none;
+      border-radius: .6rem;
+      font-family: 'Shippori Mincho', serif;
+      font-size: .95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .2s, opacity .2s;
+      text-align: center;
+    }
+
+    .btn-checkout:hover:not(:disabled) {
+      background: oklch(0.35 0.02 60);
+    }
+
+    .btn-checkout:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    /* ── Error message ── */
+    .error-msg {
+      display: none;
+      margin-top: .8rem;
+      padding: .7rem .9rem;
+      background: oklch(0.96 0.02 20);
+      border: 1px solid oklch(0.85 0.05 20);
+      border-radius: .5rem;
+      font-size: .8rem;
+      color: oklch(0.40 0.10 20);
+      line-height: 1.5;
+    }
+
+    .error-msg.visible { display: block; }
+
+    /* ── Notes section (bottom) ── */
+    .bottom-notes {
+      margin-top: 2.5rem;
+      padding: 1.4rem 1.5rem;
+      background: var(--dawn-pink);
+      border: 1px solid oklch(0.88 0.03 10);
+      border-radius: .75rem;
+      font-size: .82rem;
+      color: var(--fg);
+      line-height: 1.8;
+    }
+
+    .bottom-notes h3 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: .95rem;
+      font-weight: 500;
+      margin-bottom: .6rem;
+    }
+
+    .bottom-notes ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+
+    .bottom-notes li::before {
+      content: '・';
+      color: var(--gold);
+    }
+
+    .bottom-notes a {
+      color: var(--gold);
+      text-underline-offset: 3px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--fg);
+      color: oklch(0.92 0.01 90);
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+      margin-bottom: .8rem;
+    }
+
+    .footer-sub {
+      font-size: .8rem;
+      color: oklch(0.65 0.01 90);
+      margin-bottom: 1rem;
+    }
+
+    .footer-gold {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto .9rem;
+      opacity: .5;
+    }
+
+    .footer-copy {
+      font-size: .75rem;
+      color: oklch(0.55 0.01 90);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Let's Pray / Play for Peace</a>
+      <a href="/" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        サイトに戻る
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-label">Tickets</span>
+    <h1>チケット購入</h1>
+    <div class="gold-divider"></div>
+    <p class="hero-note">東京・広島公演のチケットをお選びください。各種別最大5枚までご購入いただけます。</p>
+  </section>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Left: ticket selection -->
+    <div class="tickets-col">
+
+      <!-- Tokyo -->
+      <div class="concert-section">
+        <div class="section-heading">東京公演 — 2026年4月25日（土）19:30</div>
+        <div class="ticket-grid">
+
+          <div class="ticket-card" id="card-t-adult">
+            <img src="/ticket-tokyo-adult.jpg" alt="東京公演 大人席" />
+            <div class="ticket-card-body">
+              <div class="ticket-name">東京公演｜大人席</div>
+              <div class="ticket-price">¥2,999 / 枚</div>
+              <div class="qty-row">
+                <button class="qty-btn" onclick="changeQty('t-adult', -1)" id="btn-minus-t-adult" disabled>−</button>
+                <span class="qty-num" id="qty-t-adult">0</span>
+                <button class="qty-btn" onclick="changeQty('t-adult', 1)" id="btn-plus-t-adult">＋</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket-card" id="card-t-student">
+            <img src="/ticket-tokyo-student.jpg" alt="東京公演 学生席" />
+            <div class="ticket-card-body">
+              <div class="ticket-name">東京公演｜学生席</div>
+              <div class="ticket-price">¥1,500 / 枚</div>
+              <div class="ticket-note">※当日学生証をご提示ください</div>
+              <div class="qty-row">
+                <button class="qty-btn" onclick="changeQty('t-student', -1)" id="btn-minus-t-student" disabled>−</button>
+                <span class="qty-num" id="qty-t-student">0</span>
+                <button class="qty-btn" onclick="changeQty('t-student', 1)" id="btn-plus-t-student">＋</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Hiroshima -->
+      <div class="concert-section">
+        <div class="section-heading">広島公演 — 2026年5月3日（日）18:30</div>
+        <div class="ticket-grid">
+
+          <div class="ticket-card" id="card-h-adult">
+            <img src="/ticket-hiroshima-adult.jpg" alt="広島公演 大人席" />
+            <div class="ticket-card-body">
+              <div class="ticket-name">広島公演｜大人席</div>
+              <div class="ticket-price">¥2,999 / 枚</div>
+              <div class="qty-row">
+                <button class="qty-btn" onclick="changeQty('h-adult', -1)" id="btn-minus-h-adult" disabled>−</button>
+                <span class="qty-num" id="qty-h-adult">0</span>
+                <button class="qty-btn" onclick="changeQty('h-adult', 1)" id="btn-plus-h-adult">＋</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticket-card" id="card-h-student">
+            <img src="/ticket-hiroshima-student.jpg" alt="広島公演 学生席" />
+            <div class="ticket-card-body">
+              <div class="ticket-name">広島公演｜学生席</div>
+              <div class="ticket-price">¥1,500 / 枚</div>
+              <div class="ticket-note">※当日学生証をご提示ください</div>
+              <div class="qty-row">
+                <button class="qty-btn" onclick="changeQty('h-student', -1)" id="btn-minus-h-student" disabled>−</button>
+                <span class="qty-num" id="qty-h-student">0</span>
+                <button class="qty-btn" onclick="changeQty('h-student', 1)" id="btn-plus-h-student">＋</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bottom notes -->
+      <div class="bottom-notes">
+        <h3>ご購入にあたって</h3>
+        <ul>
+          <li>お支払い方法：クレジットカード（Visa / Mastercard / AMEX / JCB）</li>
+          <li>コンサート収益はウクライナロータリークラブを通じてウクライナの子どもたちへ寄付されます</li>
+          <li>特典付きプランは<a href="https://camp-fire.jp/projects/923800" target="_blank" rel="noopener">クラウドファンディング</a>もご覧ください</li>
+          <li>お問い合わせ：<a href="mailto:jundaiokano@keio.jp">jundaiokano@keio.jp</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Right: summary sidebar -->
+    <div class="sidebar">
+      <div class="summary-card">
+        <div class="summary-header">ご注文内容</div>
+        <div class="summary-body">
+
+          <p class="summary-empty" id="summary-empty">チケットを選択してください</p>
+          <ul class="summary-items" id="summary-items" style="display:none"></ul>
+
+          <div class="summary-total-row" id="summary-total-row" style="display:none">
+            <span class="summary-total-label">合計</span>
+            <span class="summary-total-amount" id="summary-total">¥0</span>
+          </div>
+
+          <label class="notes-label" for="notes">ご要望・ご質問（任意）</label>
+          <textarea class="notes-textarea" id="notes" placeholder="例：車椅子スペースを希望します"></textarea>
+
+          <button class="btn-checkout" id="btn-checkout" disabled onclick="handleCheckout()">
+            決済へ進む
+          </button>
+          <div class="error-msg" id="error-msg"></div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">Let's Pray / Play for Peace</div>
+    <p class="footer-sub">平和のために、音楽と祈りを。</p>
+    <div class="footer-gold"></div>
+    <p class="footer-copy">&copy; 2026 Let's Pray/Play for Peace 実行委員会. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const TICKETS = {
+      't-adult':   { name: '東京公演｜大人席',   price: 2999 },
+      't-student': { name: '東京公演｜学生席',   price: 1500 },
+      'h-adult':   { name: '広島公演｜大人席',   price: 2999 },
+      'h-student': { name: '広島公演｜学生席',   price: 1500 },
+    };
+
+    const quantities = { 't-adult': 0, 't-student': 0, 'h-adult': 0, 'h-student': 0 };
+
+    function changeQty(id, delta) {
+      const current = quantities[id];
+      const next = Math.max(0, Math.min(5, current + delta));
+      if (next === current) return;
+
+      quantities[id] = next;
+
+      document.getElementById('qty-' + id).textContent = next;
+      document.getElementById('btn-minus-' + id).disabled = next === 0;
+      document.getElementById('btn-plus-' + id).disabled = next === 5;
+
+      const card = document.getElementById('card-' + id);
+      if (next > 0) {
+        card.classList.add('has-quantity');
+      } else {
+        card.classList.remove('has-quantity');
+      }
+
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const items = Object.entries(quantities).filter(([, q]) => q > 0);
+      const total = items.reduce((sum, [id, q]) => sum + TICKETS[id].price * q, 0);
+
+      const summaryEmpty = document.getElementById('summary-empty');
+      const summaryItems = document.getElementById('summary-items');
+      const summaryTotalRow = document.getElementById('summary-total-row');
+      const summaryTotal = document.getElementById('summary-total');
+      const btnCheckout = document.getElementById('btn-checkout');
+
+      if (items.length === 0) {
+        summaryEmpty.style.display = '';
+        summaryItems.style.display = 'none';
+        summaryTotalRow.style.display = 'none';
+        btnCheckout.disabled = true;
+        btnCheckout.textContent = '決済へ進む';
+        return;
+      }
+
+      summaryEmpty.style.display = 'none';
+      summaryItems.style.display = '';
+      summaryTotalRow.style.display = '';
+
+      summaryItems.innerHTML = items.map(([id, qty]) => {
+        const t = TICKETS[id];
+        return `
+          <li class="summary-item">
+            <span class="summary-item-name">${t.name}</span>
+            <span class="summary-item-qty">× ${qty}</span>
+            <span class="summary-item-price">¥${(t.price * qty).toLocaleString()}</span>
+          </li>
+        `;
+      }).join('');
+
+      summaryTotal.textContent = '¥' + total.toLocaleString();
+      btnCheckout.disabled = false;
+      btnCheckout.textContent = '¥' + total.toLocaleString() + ' — 決済へ進む';
+    }
+
+    async function handleCheckout() {
+      const items = Object.entries(quantities)
+        .filter(([, q]) => q > 0)
+        .map(([id, quantity]) => ({ id, name: TICKETS[id].name, quantity }));
+
+      if (items.length === 0) return;
+
+      const notes = document.getElementById('notes').value;
+      const btn = document.getElementById('btn-checkout');
+      const errorEl = document.getElementById('error-msg');
+
+      btn.disabled = true;
+      btn.textContent = '処理中...';
+      errorEl.classList.remove('visible');
+
+      try {
+        const res = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items, notes }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || '決済の開始に失敗しました');
+        }
+
+        window.location.href = data.url;
+      } catch (err) {
+        errorEl.textContent = err.message || '通信エラーが発生しました。しばらくしてからお試しください。';
+        errorEl.classList.add('visible');
+        const total = Object.entries(quantities)
+          .filter(([, q]) => q > 0)
+          .reduce((sum, [id, q]) => sum + TICKETS[id].price * q, 0);
+        btn.disabled = false;
+        btn.textContent = '¥' + total.toLocaleString() + ' — 決済へ進む';
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>特定商取引法に基づく表記 | Let's Pray/Play for Peace 2026</title>
+  <meta name="description" content="Let's Pray/Play for Peace 2026 実行委員会の特定商取引法に基づく表記ページです。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:         oklch(0.995 0.005 90);
+      --fg:         oklch(0.25  0.02  60);
+      --muted:      oklch(0.50  0.02  60);
+      --border:     oklch(0.90  0.01  90);
+      --gold:       oklch(0.75  0.12  85);
+      --gold-light: oklch(0.97  0.02  85);
+      --card:       #ffffff;
+      --dawn-pink:  oklch(0.95  0.02  10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--fg);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-logo:hover { color: var(--gold); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    /* ── Hero banner ── */
+    .hero {
+      margin-top: 64px;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(
+        180deg,
+        oklch(0.94 0.02 250) 0%,
+        oklch(0.96 0.015 30) 50%,
+        oklch(0.95 0.02 10)  100%
+      );
+      text-align: center;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 500;
+      color: var(--fg);
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+    }
+
+    .gold-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero-note {
+      max-width: 480px;
+      margin: 0 auto;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    /* ── Main content ── */
+    .main {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── Section card ── */
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+
+    .section-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      padding: .9rem 1.4rem;
+      background: var(--gold-light);
+      color: var(--fg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: var(--gold);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+
+    tr { border-bottom: 1px solid var(--border); }
+    tr:last-child { border-bottom: none; }
+
+    th {
+      width: 38%;
+      padding: .85rem 1.4rem;
+      vertical-align: top;
+      font-weight: 500;
+      color: var(--muted);
+      text-align: left;
+      background: oklch(0.985 0.005 90);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: .85rem 1.4rem;
+      vertical-align: top;
+      color: var(--fg);
+    }
+
+    td a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    td a:hover { opacity: .75; }
+
+    /* Price highlight */
+    .price-row {
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+    }
+
+    .price-item {
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+    }
+
+    .price-label {
+      font-size: .82rem;
+      color: var(--muted);
+      min-width: 90px;
+    }
+
+    .price-value {
+      font-weight: 500;
+    }
+
+    /* Notice box */
+    .notice-box {
+      margin: 2.5rem 0 0;
+      padding: 1.2rem 1.5rem;
+      background: var(--dawn-pink);
+      border: 1px solid oklch(0.88 0.03 10);
+      border-radius: .6rem;
+      font-size: .85rem;
+      line-height: 1.7;
+      color: var(--fg);
+    }
+
+    .notice-box strong {
+      display: block;
+      font-family: 'Shippori Mincho', serif;
+      font-size: .95rem;
+      margin-bottom: .4rem;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--fg);
+      color: oklch(0.92 0.01 90);
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.05rem;
+      margin-bottom: .8rem;
+    }
+
+    .footer-sub {
+      font-size: .8rem;
+      color: oklch(0.65 0.01 90);
+      margin-bottom: 1rem;
+    }
+
+    .footer-gold {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto .9rem;
+      opacity: .5;
+    }
+
+    .footer-copy {
+      font-size: .75rem;
+      color: oklch(0.55 0.01 90);
+    }
+
+    /* ── Responsive overrides ── */
+    @media (max-width: 600px) {
+      th {
+        display: block;
+        width: 100%;
+        padding-bottom: .2rem;
+        white-space: normal;
+        background: transparent;
+        border-bottom: none;
+        font-size: .8rem;
+      }
+      td {
+        display: block;
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: .8rem;
+      }
+      tr { display: block; padding: .5rem 0; }
+      .section-title { font-size: .95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Let's Pray / Play for Peace</a>
+      <a href="/" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+        サイトに戻る
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-label">Legal</span>
+    <h1>特定商取引法に基づく表記</h1>
+    <div class="gold-divider"></div>
+    <p class="hero-note">消費者保護のため、特定商取引法第11条に基づき以下の事項を表示します。</p>
+  </section>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- 事業者情報 -->
+    <div class="section-card">
+      <div class="section-title">販売事業者・連絡先</div>
+      <table>
+        <tr>
+          <th>販売事業者名</th>
+          <td>Let's Pray/Play for Peace 2026 実行委員会</td>
+        </tr>
+        <tr>
+          <th>代表者</th>
+          <td>岡野 純大</td>
+        </tr>
+        <tr>
+          <th>所在地</th>
+          <td>神奈川県藤沢市 遠藤 H Village B2011号室</td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td>080-8412-3174</td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><a href="mailto:jundaiokano@keio.jp">jundaiokano@keio.jp</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 販売内容・価格 -->
+    <div class="section-card">
+      <div class="section-title">販売内容・価格</div>
+      <table>
+        <tr>
+          <th>販売品目</th>
+          <td>
+            <div class="price-row">
+              <div class="price-item">
+                <span class="price-label">コンサートチケット（東京公演）</span>
+                <span class="price-value">¥2,900（税込）</span>
+              </div>
+              <div class="price-item">
+                <span class="price-label">コンサートチケット（広島公演）</span>
+                <span class="price-value">¥3,500（税込）</span>
+              </div>
+              <div class="price-item">
+                <span class="price-label">クラウドファンディング支援</span>
+                <span class="price-value">¥1,000〜（各プランに準ずる）</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>追加費用</th>
+          <td>郵送リターンをご希望の場合は送料実費が別途かかります。</td>
+        </tr>
+        <tr>
+          <th>消費税</th>
+          <td>表示価格はすべて税込みです。</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 支払い・提供 -->
+    <div class="section-card">
+      <div class="section-title">支払方法・提供時期</div>
+      <table>
+        <tr>
+          <th>支払方法</th>
+          <td>クレジットカード（Stripe 決済）<br>Visa / Mastercard / American Express / JCB など</td>
+        </tr>
+        <tr>
+          <th>支払時期</th>
+          <td>購入・支援完了時に即時決済</td>
+        </tr>
+        <tr>
+          <th>提供時期</th>
+          <td>
+            <div class="price-row">
+              <div class="price-item">
+                <span class="price-label">チケット引換券</span>
+                <span>2026年4月中旬にメールにて送付</span>
+              </div>
+              <div class="price-item">
+                <span class="price-label">コンサート（東京）</span>
+                <span>2026年4月25日（土）</span>
+              </div>
+              <div class="price-item">
+                <span class="price-label">コンサート（広島）</span>
+                <span>2026年5月3日（日・祝）</span>
+              </div>
+              <div class="price-item">
+                <span class="price-label">その他リターン</span>
+                <span>2026年6月末日までに発送・提供</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- キャンセル・返金 -->
+    <div class="section-card">
+      <div class="section-title">キャンセル・返金について</div>
+      <table>
+        <tr>
+          <th>キャンセルポリシー</th>
+          <td>お客様都合によるキャンセル・返金は原則お受けできません。</td>
+        </tr>
+        <tr>
+          <th>主催者都合による中止</th>
+          <td>主催者の都合によりコンサートが中止または延期となった場合は、購入金額を全額返金いたします。</td>
+        </tr>
+        <tr>
+          <th>返金方法</th>
+          <td>Stripe 経由で原則として決済に使用したカードへ返金します。</td>
+        </tr>
+        <tr>
+          <th>お問い合わせ</th>
+          <td>返金に関するご質問は <a href="mailto:jundaiokano@keio.jp">jundaiokano@keio.jp</a> までご連絡ください。</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 注記 -->
+    <div class="notice-box">
+      <strong>ご購入前にご確認ください</strong>
+      本公演はチャリティコンサートです。収益の一部はウクライナ支援活動に充当されます。
+      チケットおよびリターン品の内容・日程は予告なく変更となる場合がございます。変更が生じた際はメールにてご連絡いたします。
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">Let's Pray / Play for Peace</div>
+    <p class="footer-sub">平和のために、音楽と祈りを。</p>
+    <div class="footer-gold"></div>
+    <p class="footer-copy">&copy; 2026 Let's Pray/Play for Peace 実行委員会. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -16,24 +16,29 @@ export default function ProjectSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const features = [
+  const events = [
     {
-      icon: Calendar,
-      title: language === 'ja' ? '開催時期' : 'Period',
-      description:
+      city: language === 'ja' ? '東京公演' : 'Tokyo',
+      date: language === 'ja' ? '2026年4月25日（土）' : 'April 25, 2026 (Sat)',
+      time: language === 'ja' ? '19:30 開演（19:15 開場）' : '7:30 PM (doors 7:15 PM)',
+      venue: language === 'ja' ? 'めぐろパーシモンホール 小ホール' : 'Meguro Persimmon Hall (Small Hall)',
+      address: language === 'ja' ? '〒152-0023 東京都目黒区八雲1-1-1' : '1-1-1 Yakumo, Meguro-ku, Tokyo 152-0023',
+      access: language === 'ja' ? '東急東横線・都立大学駅より徒歩7分' : '7 min walk from Toritsu-daigaku Station',
+    },
+    {
+      city: language === 'ja' ? '広島公演' : 'Hiroshima',
+      date: language === 'ja' ? '2026年5月3日（日）' : 'May 3, 2026 (Sun)',
+      time: language === 'ja' ? '18:30 開演（18:00 開場）' : '6:30 PM (doors 6:00 PM)',
+      venue:
         language === 'ja'
-          ? '東京公演：2026年4月25日（土）19:30開演（めぐろパーシモンホール 小ホール）/ 広島公演：2026年5月3日（日）19:30開演（広島市東区民文化センター 小ホール）'
-          : 'Tokyo: April 25, 2026 (Sat) 7:30 PM at Meguro Persimmon Hall (Small Hall) / Hiroshima: May 3, 2026 (Sun) 7:30 PM at Hiroshima Higashi Ward Cultural Center (Small Hall).',
-    },
-    {
-      icon: MapPin,
-      title: language === 'ja' ? '開催場所' : 'Location',
-      description: language === 'ja' ? '東京・広島（日本）' : 'Tokyo & Hiroshima, Japan',
-    },
-    {
-      icon: Heart,
-      title: language === 'ja' ? '支援先' : 'Beneficiaries',
-      description: language === 'ja' ? 'ウクライナロータリークラブ' : 'Ukraine Rotary Club',
+          ? '広島市東区民文化センター スタジオ1'
+          : 'Hiroshima Higashi Ward Cultural Center (Studio 1)',
+      address:
+        language === 'ja' ? '〒732-0055 広島県広島市東区東蟹屋町10番31号' : '10-31 Higashikaniya-cho, Hiroshima 732-0055',
+      access:
+        language === 'ja'
+          ? '広島駅より徒歩10分・東区役所前バス停下車すぐ'
+          : '10 min walk from Hiroshima Station, or get off at Higashi Ward Office bus stop',
     },
   ];
 
@@ -86,25 +91,49 @@ export default function ProjectSection() {
               {t('project.description')}
             </p>
 
-            {/* Feature Grid */}
-            <div className="grid grid-cols-3 gap-6">
-              {features.map((feature, index) => (
+            {/* Event Cards */}
+            <div className="grid gap-6">
+              {events.map((event, index) => (
                 <motion.div
-                  key={index}
+                  key={event.city}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  className="bg-white/60 backdrop-blur-sm rounded-sm p-5 shadow-sm"
+                  className="bg-white/60 backdrop-blur-sm rounded-sm p-6 shadow-sm"
                 >
-                  <feature.icon className="w-6 h-6 text-primary mb-3" />
-                  <h3 className="font-medium text-foreground text-sm mb-1">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground text-xs">
-                    {feature.description}
-                  </p>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Calendar className="w-5 h-5 text-primary" />
+                    <h3 className="font-medium text-foreground text-base">
+                      {event.city}
+                    </h3>
+                  </div>
+                  <div className="grid gap-2 text-sm text-foreground/90">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <span className="font-medium">{event.date}</span>
+                      <span className="text-muted-foreground">{event.time}</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-muted-foreground mt-0.5" />
+                      <div className="grid gap-1">
+                        <span className="font-medium">{event.venue}</span>
+                        <span className="text-muted-foreground">{event.address}</span>
+                        <span className="text-muted-foreground">{event.access}</span>
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
+              <div className="bg-white/60 backdrop-blur-sm rounded-sm p-5 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <Heart className="w-5 h-5 text-primary" />
+                  <h3 className="font-medium text-foreground text-sm">
+                    {language === 'ja' ? '支援先' : 'Beneficiaries'}
+                  </h3>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  {language === 'ja' ? 'ウクライナロータリークラブ' : 'Ukraine Rotary Club'}
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>

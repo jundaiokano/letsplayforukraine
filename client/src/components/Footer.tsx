@@ -18,9 +18,15 @@ export default function Footer() {
           {t('footer.hiroshima')}
         </p>
         <div className="gold-line w-24 mx-auto mb-4 opacity-50" />
-        <p className="text-background/50 text-xs">
+        <p className="text-background/50 text-xs mb-3">
           {t('footer.copyright')}
         </p>
+        <a
+          href="/tokusho.html"
+          className="text-background/40 text-xs hover:text-background/70 underline underline-offset-2 transition-colors"
+        >
+          特定商取引法に基づく表記
+        </a>
       </div>
     </footer>
   );
